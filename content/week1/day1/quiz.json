@@ -1,0 +1,74 @@
+{
+  "id": "week1-day1-quiz",
+  "title": "Syntax Basics Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "What keyword is used to declare a mutable variable in Rust?",
+      "type": "multiple-choice",
+      "options": [
+        "var",
+        "let",
+        "let mut",
+        "mut"
+      ],
+      "correct_answer": 2,
+      "explanation": "In Rust, `let mut` is used to declare a mutable variable. Variables are immutable by default, so you need the `mut` keyword to make them mutable.",
+      "skills": ["syntax"]
+    },
+    {
+      "id": "q2",
+      "question": "Which of the following are valid integer types in Rust?",
+      "type": "multiple-select",
+      "options": [
+        "i32",
+        "u64",
+        "int",
+        "i128"
+      ],
+      "correct_answers": [0, 1, 3],
+      "explanation": "Rust has signed (i8, i16, i32, i64, i128) and unsigned (u8, u16, u32, u64, u128) integer types. There is no generic 'int' type.",
+      "skills": ["syntax"]
+    },
+    {
+      "id": "q3",
+      "question": "What is the entry point function of a Rust program?",
+      "type": "multiple-choice",
+      "options": [
+        "start()",
+        "main()",
+        "run()",
+        "init()"
+      ],
+      "correct_answer": 1,
+      "explanation": "The `main()` function is the entry point of every Rust program. It's where execution begins.",
+      "skills": ["syntax"]
+    },
+    {
+      "id": "q4",
+      "question": "In Rust, println! is a:",
+      "type": "multiple-choice",
+      "options": [
+        "Function",
+        "Method",
+        "Macro",
+        "Keyword"
+      ],
+      "correct_answer": 2,
+      "explanation": "println! is a macro, indicated by the exclamation mark (!). Macros are expanded at compile time.",
+      "skills": ["syntax"]
+    },
+    {
+      "id": "q5",
+      "question": "Variables in Rust are immutable by default.",
+      "type": "multiple-choice",
+      "options": [
+        "True",
+        "False"
+      ],
+      "correct_answer": 0,
+      "explanation": "Correct! In Rust, all variables are immutable by default. You must use `let mut` to create a mutable variable.",
+      "skills": ["syntax"]
+    }
+  ]
+}

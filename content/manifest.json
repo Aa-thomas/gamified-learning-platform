@@ -1,0 +1,97 @@
+{
+  "version": "1.0",
+  "title": "14-Week Rust Bootcamp",
+  "description": "From zero to production-ready Rust developer",
+  "author": "Aaron",
+  "created_at": "2026-01-03",
+  "weeks": [
+    {
+      "id": "week1",
+      "title": "Week 1: Foundations",
+      "description": "Hello World, ownership basics, borrowing",
+      "days": [
+        {
+          "id": "week1-day1",
+          "title": "Day 1: Hello Rust",
+          "description": "Getting started with Rust",
+          "nodes": [
+            {
+              "id": "week1-day1-lecture",
+              "type": "lecture",
+              "title": "Introduction to Rust",
+              "description": "Learn the basics of Rust syntax",
+              "difficulty": "easy",
+              "estimated_minutes": 20,
+              "xp_reward": 25,
+              "content_path": "week1/day1/lecture.md",
+              "skills": ["syntax", "tooling"],
+              "prerequisites": []
+            },
+            {
+              "id": "week1-day1-quiz",
+              "type": "quiz",
+              "title": "Syntax Basics Quiz",
+              "description": "Test your understanding of Rust syntax",
+              "difficulty": "easy",
+              "estimated_minutes": 10,
+              "xp_reward": 50,
+              "content_path": "week1/day1/quiz.json",
+              "skills": ["syntax"],
+              "prerequisites": ["week1-day1-lecture"]
+            },
+            {
+              "id": "week1-day1-challenge",
+              "type": "mini-challenge",
+              "title": "Hello Fibonacci",
+              "description": "Write a function to calculate Fibonacci numbers",
+              "difficulty": "medium",
+              "estimated_minutes": 30,
+              "xp_reward": 100,
+              "content_path": "week1/day1/challenge.json",
+              "skills": ["syntax", "functions"],
+              "prerequisites": ["week1-day1-quiz"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkpoints": [],
+  "skills": [
+    {
+      "id": "syntax",
+      "name": "Rust Syntax",
+      "description": "Basic Rust language syntax"
+    },
+    {
+      "id": "tooling",
+      "name": "Rust Tooling",
+      "description": "Cargo, rustfmt, clippy"
+    },
+    {
+      "id": "functions",
+      "name": "Functions",
+      "description": "Function definitions and calls"
+    },
+    {
+      "id": "ownership",
+      "name": "Ownership",
+      "description": "Understanding ownership and borrowing"
+    },
+    {
+      "id": "lifetimes",
+      "name": "Lifetimes",
+      "description": "Lifetime annotations and elision"
+    },
+    {
+      "id": "traits",
+      "name": "Traits",
+      "description": "Trait definitions and implementations"
+    },
+    {
+      "id": "error-handling",
+      "name": "Error Handling",
+      "description": "Result, Option, and error propagation"
+    }
+  ]
+}
