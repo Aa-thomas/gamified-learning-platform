@@ -1,0 +1,204 @@
+{
+  "artifact_type": "README.md",
+  "total_points": 100,
+  "categories": [
+    {
+      "name": "Project Overview",
+      "points": 15,
+      "criteria": [
+        {
+          "description": "Clear project title and description",
+          "points": 5,
+          "indicators": {
+            "excellent": "Concise, descriptive title and one-paragraph summary",
+            "good": "Title and basic description present",
+            "poor": "Missing or unclear title/description"
+          }
+        },
+        {
+          "description": "Key features listed",
+          "points": 10,
+          "indicators": {
+            "excellent": "Bulleted list of 5+ main features with clear descriptions",
+            "good": "3-4 features mentioned",
+            "poor": "No feature list or vague descriptions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Installation Instructions",
+      "points": 20,
+      "criteria": [
+        {
+          "description": "Prerequisites clearly stated",
+          "points": 5,
+          "indicators": {
+            "excellent": "Specific versions and system requirements",
+            "good": "General prerequisites mentioned",
+            "poor": "Missing prerequisites"
+          }
+        },
+        {
+          "description": "Step-by-step installation guide",
+          "points": 15,
+          "indicators": {
+            "excellent": "Multiple install methods with exact commands for each step",
+            "good": "Basic install steps with commands",
+            "poor": "Vague or missing install instructions"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usage Examples",
+      "points": 25,
+      "criteria": [
+        {
+          "description": "Quick start example provided",
+          "points": 10,
+          "indicators": {
+            "excellent": "Complete working example showing common use case",
+            "good": "Basic example with minimal explanation",
+            "poor": "No quick start example"
+          }
+        },
+        {
+          "description": "Multiple usage scenarios documented",
+          "points": 15,
+          "indicators": {
+            "excellent": "5+ examples covering different features with code blocks",
+            "good": "2-3 examples with some variety",
+            "poor": "Single example or no examples"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Development Setup",
+      "points": 15,
+      "criteria": [
+        {
+          "description": "Build instructions",
+          "points": 5,
+          "indicators": {
+            "excellent": "Commands for building, testing, and running locally",
+            "good": "Basic build command",
+            "poor": "No build instructions"
+          }
+        },
+        {
+          "description": "Project structure explained",
+          "points": 5,
+          "indicators": {
+            "excellent": "Directory tree with descriptions of key files/folders",
+            "good": "List of main directories",
+            "poor": "No project structure"
+          }
+        },
+        {
+          "description": "Contributing guidelines",
+          "points": 5,
+          "indicators": {
+            "excellent": "Clear process for contributing with code style requirements",
+            "good": "Basic contributing section",
+            "poor": "No contributing info"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Troubleshooting & Support",
+      "points": 10,
+      "criteria": [
+        {
+          "description": "Common issues documented",
+          "points": 6,
+          "indicators": {
+            "excellent": "3+ common problems with solutions",
+            "good": "1-2 issues mentioned",
+            "poor": "No troubleshooting section"
+          }
+        },
+        {
+          "description": "Support contact or resources",
+          "points": 4,
+          "indicators": {
+            "excellent": "Links to issue tracker, chat, or support channels",
+            "good": "Basic contact info",
+            "poor": "No support information"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documentation Quality",
+      "points": 10,
+      "criteria": [
+        {
+          "description": "Code blocks properly formatted",
+          "points": 3,
+          "indicators": {
+            "excellent": "All code blocks with syntax highlighting (```bash, ```rust)",
+            "good": "Most code in blocks but missing some syntax hints",
+            "poor": "Code not in blocks or poorly formatted"
+          }
+        },
+        {
+          "description": "Clear organization and headings",
+          "points": 4,
+          "indicators": {
+            "excellent": "Logical flow with descriptive section headings",
+            "good": "Basic sections present",
+            "poor": "Disorganized or hard to navigate"
+          }
+        },
+        {
+          "description": "Grammar and clarity",
+          "points": 3,
+          "indicators": {
+            "excellent": "Professional writing, no errors, clear language",
+            "good": "Mostly clear with minor issues",
+            "poor": "Confusing or error-filled"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Completeness",
+      "points": 5,
+      "criteria": [
+        {
+          "description": "License information",
+          "points": 2,
+          "indicators": {
+            "excellent": "License specified with link to full text",
+            "good": "License mentioned",
+            "poor": "No license"
+          }
+        },
+        {
+          "description": "Author/acknowledgments",
+          "points": 3,
+          "indicators": {
+            "excellent": "Authors listed with contact info and acknowledgments",
+            "good": "Basic author info",
+            "poor": "No attribution"
+          }
+        }
+      ]
+    }
+  ],
+  "grading_guidelines": {
+    "A (90-100)": "Comprehensive README with all sections. Professional quality, clear examples, well-organized.",
+    "B (80-89)": "Good README covering most important areas. Minor gaps or less detailed examples.",
+    "C (70-79)": "Adequate README with basic install and usage. Missing some important sections.",
+    "D (60-69)": "Minimal README with sparse information. Difficult to use the project from the README alone.",
+    "F (0-59)": "Severely lacking README. Missing critical information like installation or usage."
+  },
+  "mandatory_sections": [
+    "Project description",
+    "Installation instructions",
+    "At least one usage example"
+  ]
+}

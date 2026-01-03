@@ -1,0 +1,156 @@
+{
+  "artifact_type": "DESIGN.md",
+  "total_points": 100,
+  "categories": [
+    {
+      "name": "Architecture Overview",
+      "points": 25,
+      "criteria": [
+        {
+          "description": "Clear high-level architecture diagram or description",
+          "points": 8,
+          "indicators": {
+            "excellent": "Visual diagram or clear component hierarchy with relationships",
+            "good": "Textual description of major components and their roles",
+            "poor": "Vague or missing component overview"
+          }
+        },
+        {
+          "description": "Component responsibilities clearly defined",
+          "points": 8,
+          "indicators": {
+            "excellent": "Each component has specific, non-overlapping responsibilities",
+            "good": "Most components have defined responsibilities",
+            "poor": "Unclear what each component does"
+          }
+        },
+        {
+          "description": "Interfaces between components documented",
+          "points": 9,
+          "indicators": {
+            "excellent": "Function signatures, data contracts, or API endpoints specified",
+            "good": "General description of how components interact",
+            "poor": "No mention of component interfaces"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Structures & Types",
+      "points": 20,
+      "criteria": [
+        {
+          "description": "Core data types defined with fields",
+          "points": 10,
+          "indicators": {
+            "excellent": "Struct/class definitions with types for all fields",
+            "good": "List of main types with some field details",
+            "poor": "Vague mention of data structures"
+          }
+        },
+        {
+          "description": "Invariants and constraints documented",
+          "points": 10,
+          "indicators": {
+            "excellent": "Explicit invariants (e.g., 'IDs are unique and monotonic')",
+            "good": "Some constraints mentioned (e.g., 'title must not be empty')",
+            "poor": "No invariants or constraints specified"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Data Flow & Operations",
+      "points": 20,
+      "criteria": [
+        {
+          "description": "Key operations explained step-by-step",
+          "points": 10,
+          "indicators": {
+            "excellent": "Multiple operations with detailed flow (user input → validation → storage → output)",
+            "good": "At least one operation explained in detail",
+            "poor": "No operation flows documented"
+          }
+        },
+        {
+          "description": "State changes and side effects described",
+          "points": 10,
+          "indicators": {
+            "excellent": "Clear explanation of what changes and when",
+            "good": "Some mention of state modifications",
+            "poor": "No discussion of state changes"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Error Handling",
+      "points": 15,
+      "criteria": [
+        {
+          "description": "Error types or categories defined",
+          "points": 7,
+          "indicators": {
+            "excellent": "Enumeration of specific error types with descriptions",
+            "good": "General categories of errors mentioned",
+            "poor": "No error handling strategy"
+          }
+        },
+        {
+          "description": "Error recovery strategies explained",
+          "points": 8,
+          "indicators": {
+            "excellent": "Specific recovery actions for each error type",
+            "good": "General approach to error handling",
+            "poor": "No recovery strategies"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trade-offs & Decisions",
+      "points": 10,
+      "indicators": {
+        "excellent": "Multiple design decisions explained with pros/cons and rationale",
+        "good": "At least one significant design decision justified",
+        "poor": "No explanation of design choices"
+      }
+    },
+    {
+      "name": "Testing Strategy",
+      "points": 10,
+      "criteria": [
+        {
+          "description": "Test categories identified (unit, integration, etc.)",
+          "points": 5,
+          "indicators": {
+            "excellent": "Clear breakdown of what to test at each level",
+            "good": "Mention of test types",
+            "poor": "No testing strategy"
+          }
+        },
+        {
+          "description": "Key test scenarios described",
+          "points": 5,
+          "indicators": {
+            "excellent": "Specific edge cases or scenarios to test",
+            "good": "General areas to test",
+            "poor": "No test scenarios"
+          }
+        }
+      ]
+    }
+  ],
+  "grading_guidelines": {
+    "A (90-100)": "Comprehensive design with architecture, data structures, data flow, error handling, trade-offs, and testing. Professional quality.",
+    "B (80-89)": "Good design covering most major areas. Some minor gaps in detail or missing sections.",
+    "C (70-79)": "Adequate design with basic architecture and data structures. Missing significant details.",
+    "D (60-69)": "Minimal design with vague descriptions. Major gaps in coverage.",
+    "F (0-59)": "Incomplete or severely lacking design documentation."
+  },
+  "mandatory_sections": [
+    "Architecture or component overview",
+    "Data structures or types",
+    "At least one operation or data flow"
+  ]
+}
