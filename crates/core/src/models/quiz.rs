@@ -3,6 +3,36 @@ use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Quiz {
+    pub id: String,
+    pub title: String,
+    pub description: String,
+    pub difficulty: String,
+    pub skills: Vec<String>,
+    pub passing_score: i32,
+    pub time_limit_seconds: Option<i32>,
+    pub questions: Vec<Question>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Question {
+    pub id: String,
+    pub question_type: String,
+    pub prompt: String,
+    pub code_snippet: Option<String>,
+    pub options: Vec<QuestionOption>,
+    pub correct_answer: String,
+    pub explanation: String,
+    pub points: i32,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct QuestionOption {
+    pub id: String,
+    pub text: String,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct QuizAttempt {
     pub id: String,
     pub user_id: String,

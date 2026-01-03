@@ -3,6 +3,8 @@ resolver = "2"
 members = [
     "crates/core",
     "crates/content",
+    "crates/runner",
+    "crates/grader",
     "apps/desktop/src-tauri",
 ]
 

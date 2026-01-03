@@ -32,6 +32,17 @@ pub fn run() {
             commands::content::get_node_by_id,
             commands::content::load_lecture,
             commands::content::load_quiz,
+            // Lecture commands
+            commands::lecture::start_lecture,
+            commands::lecture::update_lecture_time,
+            commands::lecture::complete_lecture,
+            // Quiz commands
+            commands::quiz::submit_quiz,
+            // Session commands
+            commands::session::create_daily_session,
+            commands::session::start_session,
+            commands::session::complete_session,
+            commands::session::get_interrupted_session,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
