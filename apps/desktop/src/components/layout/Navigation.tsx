@@ -1,6 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
-import { Home, Map, BarChart3, Settings, Trophy, Brain } from 'lucide-react'
+import { Home, Map, BarChart3, Settings, Trophy, Brain, BookOpen } from 'lucide-react'
 import { useReviewStore } from '@/stores/reviewStore'
+import { useCurriculumStore } from '@/stores/curriculumStore'
 import { useEffect } from 'react'
 
 const navItems = [
@@ -9,22 +10,30 @@ const navItems = [
   { path: '/badges', label: 'Badges', icon: Trophy },
   { path: '/review', label: 'Review', icon: Brain, showBadge: true },
   { path: '/progress', label: 'Progress', icon: BarChart3 },
+  { path: '/curriculum', label: 'Curriculum', icon: BookOpen },
   { path: '/settings', label: 'Settings', icon: Settings },
 ]
 
 export function Navigation() {
   const location = useLocation()
   const { dueCount, fetchDueCount } = useReviewStore()
+  const { activeCurriculum, fetchActiveCurriculum } = useCurriculumStore()
 
   useEffect(() => {
     fetchDueCount()
-  }, [fetchDueCount])
+    fetchActiveCurriculum()
+  }, [fetchDueCount, fetchActiveCurriculum])
 
   return (
     <nav className="bg-white border-b border-gray-200 px-4 py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-xl font-bold text-primary">🦀 RustCamp</span>
+          {activeCurriculum && (
+            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+              {activeCurriculum.name}
+            </span>
+          )}
         </div>
 
         <div className="flex items-center gap-1">

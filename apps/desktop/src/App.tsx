@@ -10,6 +10,7 @@ import { Progress } from './pages/Progress'
 import { Settings } from './pages/Settings'
 import { Badges } from './pages/Badges'
 import { Review } from './pages/Review'
+import { CurriculumManager } from './pages/CurriculumManager'
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
             <Route path="/progress" element={<Progress />} />
             <Route path="/badges" element={<Badges />} />
             <Route path="/review" element={<Review />} />
+            <Route path="/curriculum" element={<CurriculumManager />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>

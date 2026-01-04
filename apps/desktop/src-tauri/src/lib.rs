@@ -16,6 +16,7 @@ pub fn run() {
 
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
+        .plugin(tauri_plugin_dialog::init())
         .manage(app_state)
         .invoke_handler(tauri::generate_handler![
             // User commands
@@ -56,6 +57,14 @@ pub fn run() {
             commands::review::create_review_item,
             commands::review::apply_mastery_decay_on_startup,
             commands::review::get_low_mastery_skills,
+            // Curriculum commands
+            commands::curriculum::validate_curriculum,
+            commands::curriculum::import_curriculum,
+            commands::curriculum::list_curricula,
+            commands::curriculum::get_active_curriculum,
+            commands::curriculum::switch_curriculum,
+            commands::curriculum::delete_curriculum,
+            commands::curriculum::get_curriculum,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

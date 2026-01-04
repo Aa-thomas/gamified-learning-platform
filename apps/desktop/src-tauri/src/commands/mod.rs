@@ -1,5 +1,6 @@
 pub mod badge;
 pub mod content;
+pub mod curriculum;
 pub mod lecture;
 pub mod progress;
 pub mod quiz;

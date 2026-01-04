@@ -7,6 +7,7 @@ pub mod challenge;
 pub mod artifact;
 pub mod review;
 pub mod session;
+pub mod curriculum;
 
 pub use user::User;
 pub use progress::{NodeProgress, NodeStatus};
@@ -17,3 +18,4 @@ pub use challenge::ChallengeAttempt;
 pub use artifact::ArtifactSubmission;
 pub use review::ReviewItem;
 pub use session::SessionHistory;
+pub use curriculum::{Curriculum, CurriculumSummary};
