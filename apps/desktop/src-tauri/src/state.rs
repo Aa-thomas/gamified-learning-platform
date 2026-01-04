@@ -10,6 +10,18 @@ pub struct AppState {
 }
 
 impl AppState {
+    pub fn database(&self) -> &AppDatabase {
+        &self.db
+    }
+
+    pub fn get_current_user_id(&self) -> String {
+        self.current_user_id
+            .lock()
+            .ok()
+            .and_then(|guard| guard.clone())
+            .unwrap_or_else(|| "default-user".to_string())
+    }
+
     pub fn new(content_path: PathBuf) -> Result<Self, String> {
         // Get app data directory for database
         let db_dir = dirs::data_local_dir()

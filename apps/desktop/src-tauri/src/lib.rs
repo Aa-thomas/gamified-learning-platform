@@ -43,6 +43,19 @@ pub fn run() {
             commands::session::start_session,
             commands::session::complete_session,
             commands::session::get_interrupted_session,
+            // Badge commands
+            commands::badge::get_all_badges,
+            commands::badge::get_earned_badges,
+            commands::badge::check_and_unlock_badges,
+            commands::badge::update_badge_progress,
+            // Review commands
+            commands::review::get_due_reviews,
+            commands::review::get_due_review_count,
+            commands::review::get_all_reviews,
+            commands::review::submit_review,
+            commands::review::create_review_item,
+            commands::review::apply_mastery_decay_on_startup,
+            commands::review::get_low_mastery_skills,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

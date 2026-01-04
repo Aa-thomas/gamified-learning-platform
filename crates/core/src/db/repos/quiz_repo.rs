@@ -87,6 +87,38 @@ impl QuizRepository {
         Ok(results)
     }
 
+    pub fn get_all_for_user(conn: &Connection, user_id: &str) -> DbResult<Vec<QuizAttempt>> {
+        let mut stmt = conn.prepare(
+            "SELECT id, user_id, quiz_id, node_id, answers_json, score_percentage, xp_earned, submitted_at
+             FROM quiz_attempts WHERE user_id = ?1 ORDER BY submitted_at DESC"
+        )?;
+
+        let attempt_iter = stmt.query_map(params![user_id], |row| {
+            let answers_json: String = row.get(4)?;
+            let answers: Vec<String> = serde_json::from_str(&answers_json)
+                .map_err(|e| rusqlite::Error::FromSqlConversionFailure(4, rusqlite::types::Type::Text, Box::new(e)))?;
+
+            Ok(QuizAttempt {
+                id: row.get(0)?,
+                user_id: row.get(1)?,
+                quiz_id: row.get(2)?,
+                node_id: row.get(3)?,
+                answers,
+                score_percentage: row.get(5)?,
+                xp_earned: row.get(6)?,
+                submitted_at: DateTime::parse_from_rfc3339(&row.get::<_, String>(7)?)
+                    .map_err(|e| rusqlite::Error::FromSqlConversionFailure(7, rusqlite::types::Type::Text, Box::new(e)))?
+                    .with_timezone(&Utc),
+            })
+        })?;
+
+        let mut results = Vec::new();
+        for attempt in attempt_iter {
+            results.push(attempt?);
+        }
+        Ok(results)
+    }
+
     pub fn get_recent(conn: &Connection, user_id: &str, limit: i32) -> DbResult<Vec<QuizAttempt>> {
         let mut stmt = conn.prepare(
             "SELECT id, user_id, quiz_id, node_id, answers_json, score_percentage, xp_earned, submitted_at

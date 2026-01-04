@@ -1,12 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/layout/Navigation'
 import { StatusBar } from './components/layout/StatusBar'
+import { BadgeUnlockNotification } from './components/badges/BadgeUnlockNotification'
 import { Home } from './pages/Home'
 import { Lecture } from './pages/Lecture'
 import { Quiz } from './pages/Quiz'
 import { SkillTree } from './pages/SkillTree'
 import { Progress } from './pages/Progress'
 import { Settings } from './pages/Settings'
+import { Badges } from './pages/Badges'
+import { Review } from './pages/Review'
 
 export default function App() {
   return (
@@ -21,11 +24,14 @@ export default function App() {
             <Route path="/quiz/:quizId" element={<Quiz />} />
             <Route path="/skill-tree" element={<SkillTree />} />
             <Route path="/progress" element={<Progress />} />
+            <Route path="/badges" element={<Badges />} />
+            <Route path="/review" element={<Review />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
 
         <StatusBar />
+        <BadgeUnlockNotification />
       </div>
     </BrowserRouter>
   )
