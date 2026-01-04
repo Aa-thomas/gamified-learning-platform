@@ -65,6 +65,17 @@ pub fn run() {
             commands::curriculum::switch_curriculum,
             commands::curriculum::delete_curriculum,
             commands::curriculum::get_curriculum,
+            // System commands
+            commands::system::check_system_status,
+            commands::system::check_docker_status,
+            commands::system::save_api_key,
+            commands::system::get_api_key_status,
+            commands::system::export_user_data,
+            commands::system::import_user_data,
+            commands::system::reset_all_progress,
+            commands::system::is_first_launch,
+            commands::system::complete_onboarding,
+            commands::system::is_onboarding_complete,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

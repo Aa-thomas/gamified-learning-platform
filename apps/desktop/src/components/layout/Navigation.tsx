@@ -2,6 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Home, Map, BarChart3, Settings, Trophy, Brain, BookOpen } from 'lucide-react'
 import { useReviewStore } from '@/stores/reviewStore'
 import { useCurriculumStore } from '@/stores/curriculumStore'
+import { ThemeToggle } from './ThemeToggle'
 import { useEffect } from 'react'
 
 const navItems = [
@@ -25,12 +26,12 @@ export function Navigation() {
   }, [fetchDueCount, fetchActiveCurriculum])
 
   return (
-    <nav className="bg-white border-b border-gray-200 px-4 py-2">
+    <nav className="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 px-4 py-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-xl font-bold text-primary">🦀 RustCamp</span>
           {activeCurriculum && (
-            <span className="text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded-full">
+            <span className="text-xs bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-1 rounded-full">
               {activeCurriculum.name}
             </span>
           )}
@@ -49,7 +50,7 @@ export function Navigation() {
                   transition-colors
                   ${isActive
                     ? 'bg-primary text-white'
-                    : 'text-gray-600 hover:bg-gray-100'
+                    : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700'
                   }
                 `}
               >
@@ -64,6 +65,7 @@ export function Navigation() {
               </Link>
             )
           })}
+          <ThemeToggle />
         </div>
       </div>
     </nav>

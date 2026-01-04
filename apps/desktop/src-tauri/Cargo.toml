@@ -20,6 +20,7 @@ content = { path = "../../../crates/content" }
 uuid = { version = "1.6", features = ["v4"] }
 dirs = "5.0"
 chrono = { version = "0.4", features = ["serde"] }
+base64 = "0.22"
 rusqlite.workspace = true
 
 [lib]
