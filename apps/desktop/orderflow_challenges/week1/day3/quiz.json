@@ -1,0 +1,76 @@
+{
+  "id": "w1d3-quiz",
+  "title": "Agents & Regimes Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why is it a bug (for determinism) if agents directly mutate the engine's order state, instead of returning actions/events?",
+      "type": "multiple-choice",
+      "options": [
+        "It makes the code harder to read",
+        "Mutation order becomes dependent on call ordering; hard to replay because 'what happened' isn't an explicit event stream",
+        "It uses more memory",
+        "It's slower than returning actions"
+      ],
+      "correct_answer": 1,
+      "explanation": "Mutation order becomes dependent on call ordering and internal agent decisions. Hard to replay because the 'what happened' isn't represented as an explicit event stream. Actions/events form a stable, serializable boundary that supports testing and replay.",
+      "skills": ["agents", "determinism"]
+    },
+    {
+      "id": "q2",
+      "question": "What two parameters must be explicit in an agent step() signature to avoid 'hidden nondeterminism'?",
+      "type": "multiple-choice",
+      "options": [
+        "tick count and system time",
+        "ctx: &Ctx (deterministic inputs) and rng: &mut Rng (explicit nondeterministic source)",
+        "memory allocator and thread ID",
+        "config file path and environment variables"
+      ],
+      "correct_answer": 1,
+      "explanation": "ctx: &Ctx provides explicit deterministic inputs like tick/regime/open IDs. rng: &mut Rng is the only allowed nondeterministic source, made explicit and seeded. Making both explicit enables reproducible tests and prevents accidental globals.",
+      "skills": ["agents", "determinism"]
+    },
+    {
+      "id": "q3",
+      "question": "You run agents in a Vec<Box<dyn Agent>>. Two different runs produce different event order even with the same seed. What's the likely cause?",
+      "type": "multiple-choice",
+      "options": [
+        "The seed is being modified during execution",
+        "Iteration order is not stable (agents from unordered source); fix by sorting agents by id() each tick",
+        "The compiler is optimizing the loop differently",
+        "Memory addresses are affecting the order"
+      ],
+      "correct_answer": 1,
+      "explanation": "Cause: iteration order is not stable (e.g., agents inserted from unordered source, or sorting inconsistently). Fix: assign stable AgentId and sort agents by id() each tick (or maintain a stable ordered vector).",
+      "skills": ["agents", "determinism"]
+    },
+    {
+      "id": "q4",
+      "question": "In cancel-storm, what should the cancel bot be allowed to observe from the Context?",
+      "type": "multiple-choice",
+      "options": [
+        "Full access to all internal engine state for optimal behavior",
+        "Constrained view: list of open IDs, regime, tick, maybe a symbol filter",
+        "Only the current tick number",
+        "Nothing - agents should be stateless"
+      ],
+      "correct_answer": 1,
+      "explanation": "Allow a constrained view: list of open IDs (maybe limited sample), regime, tick, and maybe a symbol filter. Disallow direct access to internal maps/queues beyond what's needed. Tradeoff: less 'optimal' bot behavior, but better encapsulation and testability.",
+      "skills": ["agents", "modeling"]
+    },
+    {
+      "id": "q5",
+      "question": "Why is enum Regime { Calm, Burst, CancelStorm } better than strings like 'burst' in core logic?",
+      "type": "multiple-choice",
+      "options": [
+        "Enums use less memory than strings",
+        "Prevents invalid states at compile time, enables exhaustive match handling, makes refactors safe",
+        "Strings are slower to compare",
+        "Enums support more variants than strings"
+      ],
+      "correct_answer": 1,
+      "explanation": "Prevents invalid states ('brust') at compile time. Enables exhaustive match handling for transitions/behavior. Makes refactors safe: adding a new regime forces updates everywhere.",
+      "skills": ["enums", "modeling"]
+    }
+  ]
+}

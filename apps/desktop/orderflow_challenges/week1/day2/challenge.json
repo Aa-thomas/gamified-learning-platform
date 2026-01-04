@@ -1,0 +1,16 @@
+{
+  "id": "w1d2-challenge",
+  "title": "Seeded RNG Implementation",
+  "description": "Implement a minimal deterministic RNG (LCG-style) and prove repeatability with tests.",
+  "instructions": "## Goal\n\nImplement a minimal deterministic RNG and prove repeatability.\n\n## Requirements\n\n1. Create `struct Rng { state: u64 }` with:\n   - `fn new(seed: u64) -> Self`\n   - `fn next_u32(&mut self) -> u32` using a simple LCG update:\n     - `state = state * A + C` using `wrapping_mul`/`wrapping_add`\n     - return upper 32 bits as `u32`\n\n2. Tests:\n   - Same seed produces the same first 5 outputs (assert exact `Vec<u32>`)\n   - Different seeds produce a different first output (assert `!=`)\n\n## LCG Constants\n\nUse these constants for the Linear Congruential Generator:\n- A = 6364136223846793005\n- C = 1\n\n## Guardrails\n\n- No `unwrap/expect` in library code\n- Deterministic: no wall-clock, no randomness beyond your `Rng`",
+  "starter_code": "struct Rng {\n    state: u64,\n}\n\nimpl Rng {\n    fn new(seed: u64) -> Self {\n        // TODO: Initialize with seed\n        todo!()\n    }\n\n    fn next_u32(&mut self) -> u32 {\n        // TODO: LCG update and return upper 32 bits\n        // state = state * 6364136223846793005 + 1 (using wrapping ops)\n        todo!()\n    }\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn same_seed_same_output() {\n        // TODO: Test that same seed produces identical sequence\n    }\n\n    #[test]\n    fn different_seed_different_output() {\n        // TODO: Test that different seeds produce different sequences\n    }\n}",
+  "test_code": "#[cfg(test)]\nmod solution_tests {\n    use super::*;\n\n    #[test]\n    fn test_same_seed_same_sequence() {\n        let mut rng1 = Rng::new(42);\n        let mut rng2 = Rng::new(42);\n        \n        let seq1: Vec<u32> = (0..5).map(|_| rng1.next_u32()).collect();\n        let seq2: Vec<u32> = (0..5).map(|_| rng2.next_u32()).collect();\n        \n        assert_eq!(seq1, seq2);\n    }\n\n    #[test]\n    fn test_different_seeds_different_output() {\n        let mut rng1 = Rng::new(42);\n        let mut rng2 = Rng::new(123);\n        \n        assert_ne!(rng1.next_u32(), rng2.next_u32());\n    }\n\n    #[test]\n    fn test_sequence_is_deterministic() {\n        let mut rng = Rng::new(42);\n        let expected = vec![62, 3239186381, 1578406331, 3796836988, 1056445266];\n        let actual: Vec<u32> = (0..5).map(|_| rng.next_u32()).collect();\n        assert_eq!(actual, expected);\n    }\n}",
+  "solution": "struct Rng {\n    state: u64,\n}\n\nimpl Rng {\n    fn new(seed: u64) -> Self {\n        Self { state: seed }\n    }\n\n    fn next_u32(&mut self) -> u32 {\n        self.state = self.state\n            .wrapping_mul(6364136223846793005)\n            .wrapping_add(1);\n        (self.state >> 32) as u32\n    }\n}",
+  "hints": [
+    "Use wrapping_mul and wrapping_add to handle overflow",
+    "To get upper 32 bits: (state >> 32) as u32",
+    "The LCG formula is: next_state = state * A + C"
+  ],
+  "difficulty": "medium",
+  "skills": ["determinism", "rng", "testing"]
+}

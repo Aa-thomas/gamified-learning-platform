@@ -1,0 +1,76 @@
+{
+  "id": "w1d1-quiz",
+  "title": "Event Modeling Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You're tempted to represent events as (\"NEW\", id) and (\"CANCEL\", id) strings. What breaks first when the system grows, and what's the type-driven fix?",
+      "type": "multiple-choice",
+      "options": [
+        "Performance degrades - use integers instead of strings",
+        "Strings allow invalid variants at runtime and you lose compiler exhaustiveness checking - use enum Event { NewOrder{...}, Cancel{...} }",
+        "Memory usage increases - use a HashMap for event lookup",
+        "Serialization becomes harder - use JSON encoding"
+      ],
+      "correct_answer": 1,
+      "explanation": "Strings allow invalid variants at runtime (typos, missing fields, partial parsing). You lose compiler exhaustiveness checking; adding a new event becomes 'silent partial support.' The fix is to use enum Event { NewOrder{...}, Cancel{...}, Fill{...} } with central match handling.",
+      "skills": ["enums", "modeling"]
+    },
+    {
+      "id": "q2",
+      "question": "What's the practical advantage of match exhaustiveness for an event loop?",
+      "type": "multiple-choice",
+      "options": [
+        "It makes the code run faster by optimizing branches",
+        "It forces you to handle every event variant explicitly when you evolve the protocol, preventing 'new variant compiles but is ignored'",
+        "It automatically generates documentation for each event type",
+        "It enables runtime reflection on event types"
+      ],
+      "correct_answer": 1,
+      "explanation": "Exhaustiveness forces you to handle every event variant explicitly when you evolve the protocol. This prevents 'new variant compiles but is ignored,' causing missing metrics updates or inconsistent state. It encourages a single transition point (apply) rather than scattered conditionals.",
+      "skills": ["match", "modeling"]
+    },
+    {
+      "id": "q3",
+      "question": "Suppose Cancel(id) arrives for an order that was never opened. In a deterministic simulator core, what are two acceptable behaviors?",
+      "type": "multiple-choice",
+      "options": [
+        "Panic immediately to fail fast, or silently ignore the cancel",
+        "Return Err(DomainErr::UnknownOrder) or convert into a deterministic Reject/NoOp event recorded in trace",
+        "Log a warning and continue, or throw an exception",
+        "Queue the cancel for later, or retry with exponential backoff"
+      ],
+      "correct_answer": 1,
+      "explanation": "Behavior A: return Err(DomainErr::UnknownOrder) - shell can log and continue/stop deterministically. Behavior B: convert into a deterministic Reject/NoOp event recorded in trace. The tradeoff: Err simplifies core but may complicate replay; Reject keeps everything in the event stream for post-mortems.",
+      "skills": ["modeling", "testing"]
+    },
+    {
+      "id": "q4",
+      "question": "You need events/sec throughput. Measuring wall-clock time can break determinism. How would you design throughput reporting so runs stay reproducible?",
+      "type": "multiple-choice",
+      "options": [
+        "Use the system clock but round to the nearest second",
+        "Keep simulation time tick-based and compute 'events per tick' as deterministic metric; wall-clock reporting is display-only",
+        "Store timestamps in the event stream",
+        "Use a hardware performance counter instead of wall-clock"
+      ],
+      "correct_answer": 1,
+      "explanation": "Keep simulation time tick-based and deterministic; compute 'events per tick' as deterministic metric. If wall-clock is reported, treat it as non-authoritative and keep it out of trace/logic (display-only). Failure mode: trace differs because timing/printing/logging changes event scheduling or ordering.",
+      "skills": ["determinism", "metrics"]
+    },
+    {
+      "id": "q5",
+      "question": "When is Option better than Result inside apply(), and when is Result better?",
+      "type": "multiple-choice",
+      "options": [
+        "Option is always better because it's simpler",
+        "Result is always better because it provides more information",
+        "Option when absence is normal (e.g., find_open_order); Result when you need a typed failure reason to enforce invariants (e.g., apply_cancel)",
+        "Use Option for success cases, Result for error cases"
+      ],
+      "correct_answer": 2,
+      "explanation": "Option when 'absence is normal' and not an error (e.g., find_open_order(id) -> Option<OrderRef>). Result when you need a typed failure reason to enforce invariants (e.g., apply_cancel(id) -> Result<(), DomainErr>). Using Result improves debugging and RUNBOOK quality ('why did this reject happen?').",
+      "skills": ["modeling"]
+    }
+  ]
+}

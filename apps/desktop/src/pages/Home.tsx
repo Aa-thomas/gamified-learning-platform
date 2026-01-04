@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { BookOpen, Code, FileText, ChevronRight } from 'lucide-react'
 import { useUserStore } from '@/stores/userStore'
@@ -9,7 +9,6 @@ export function Home() {
   const { user, createUser } = useUserStore()
   const { tree, fetchContentTree } = useContentStore()
   const { progress, fetchAllProgress } = useProgressStore()
-  const [newUsername, setNewUsername] = useState('')
 
   useEffect(() => {
     fetchContentTree()
@@ -20,36 +19,19 @@ export function Home() {
   if (!user) {
     return (
       <div className="flex items-center justify-center h-full">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-          <h1 className="text-2xl font-bold text-center mb-6">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 max-w-md w-full">
+          <h1 className="text-2xl font-bold text-center mb-6 dark:text-white">
             Welcome to RustCamp! 🦀
           </h1>
-          <p className="text-gray-600 text-center mb-6">
+          <p className="text-gray-600 dark:text-gray-400 text-center mb-6">
             A gamified journey to mastering Rust programming.
           </p>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-              if (newUsername.trim()) {
-                createUser(newUsername.trim())
-              }
-            }}
+          <button
+            onClick={() => createUser()}
+            className="w-full bg-primary text-white py-2 rounded-lg font-medium hover:bg-primary/90"
           >
-            <input
-              type="text"
-              placeholder="Enter your username"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-primary"
-            />
-            <button
-              type="submit"
-              disabled={!newUsername.trim()}
-              className="w-full bg-primary text-white py-2 rounded-lg font-medium hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              Start Learning
-            </button>
-          </form>
+            Start Learning
+          </button>
         </div>
       </div>
     )
@@ -95,10 +77,10 @@ export function Home() {
 
   return (
     <div className="p-6 max-w-4xl mx-auto">
-      <h1 className="text-3xl font-bold mb-2">
-        Welcome back, {user.username}! 👋
+      <h1 className="text-3xl font-bold mb-2 dark:text-white">
+        Welcome back! 👋
       </h1>
-      <p className="text-gray-600 mb-8">
+      <p className="text-gray-600 dark:text-gray-400 mb-8">
         Continue your Rust journey. You've completed {completedCount} of{' '}
         {totalNodes} lessons.
       </p>
@@ -148,6 +130,23 @@ export function Home() {
           <p className="text-green-700 font-medium">
             🎉 Congratulations! You've completed all available content!
           </p>
+        </div>
+      )}
+
+      {totalNodes === 0 && (
+        <div className="bg-yellow-50 dark:bg-yellow-900/20 rounded-lg p-6">
+          <h2 className="text-lg font-semibold mb-2 text-yellow-800 dark:text-yellow-200">
+            No Curriculum Loaded
+          </h2>
+          <p className="text-yellow-700 dark:text-yellow-300 mb-4">
+            Load a curriculum to start learning. Go to the Curriculum Manager to import or select a curriculum.
+          </p>
+          <Link
+            to="/curriculum"
+            className="inline-flex items-center gap-2 bg-yellow-600 text-white px-4 py-2 rounded-lg hover:bg-yellow-700 transition-colors"
+          >
+            Open Curriculum Manager <ChevronRight size={16} />
+          </Link>
         </div>
       )}
     </div>

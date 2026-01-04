@@ -1,0 +1,16 @@
+{
+  "id": "w1d4-challenge",
+  "title": "Metrics Implementation",
+  "description": "Implement metrics tracking with invariant tests.",
+  "instructions": "## Goal\n\nImplement a Metrics struct that tracks orders, cancels, fills, and queue depth.\n\n## Requirements\n\n1. Define `struct Metrics` with:\n   - `total_orders: u64`\n   - `total_cancels: u64`  \n   - `total_fills: u64`\n   - `queue_depth: i64` (can temporarily go negative to catch bugs)\n\n2. Implement `fn apply(&mut self, event: &Event)` that updates metrics.\n\n3. Implement `fn cancel_rate(&self) -> f64` (0.0 if no orders).\n\n4. Add invariant tests:\n   - `fills <= total_orders`\n   - `cancel_rate` is in [0.0, 1.0]\n   - `queue_depth >= 0` after valid event sequences",
+  "starter_code": "#[derive(Clone, Debug, PartialEq, Eq)]\nenum Event {\n    NewOrder(u32),\n    Cancel(u32),\n    Fill(u32),\n}\n\n#[derive(Default)]\nstruct Metrics {\n    total_orders: u64,\n    total_cancels: u64,\n    total_fills: u64,\n    queue_depth: i64,\n}\n\nimpl Metrics {\n    fn apply(&mut self, event: &Event) {\n        // TODO: Update metrics based on event type\n    }\n    \n    fn cancel_rate(&self) -> f64 {\n        // TODO: Return cancels / orders (0.0 if no orders)\n        0.0\n    }\n}",
+  "test_code": "#[cfg(test)]\nmod tests {\n    use super::*;\n\n    #[test]\n    fn test_new_order_updates_metrics() {\n        let mut m = Metrics::default();\n        m.apply(&Event::NewOrder(1));\n        assert_eq!(m.total_orders, 1);\n        assert_eq!(m.queue_depth, 1);\n    }\n\n    #[test]\n    fn test_cancel_rate_no_orders() {\n        let m = Metrics::default();\n        assert_eq!(m.cancel_rate(), 0.0);\n    }\n\n    #[test]\n    fn test_cancel_rate_calculation() {\n        let mut m = Metrics::default();\n        m.apply(&Event::NewOrder(1));\n        m.apply(&Event::NewOrder(2));\n        m.apply(&Event::Cancel(1));\n        assert!((m.cancel_rate() - 0.5).abs() < 0.001);\n    }\n\n    #[test]\n    fn invariant_fills_le_orders() {\n        let mut m = Metrics::default();\n        m.apply(&Event::NewOrder(1));\n        m.apply(&Event::NewOrder(2));\n        m.apply(&Event::Fill(1));\n        assert!(m.total_fills <= m.total_orders);\n    }\n}",
+  "solution": "impl Metrics {\n    fn apply(&mut self, event: &Event) {\n        match event {\n            Event::NewOrder(_) => {\n                self.total_orders += 1;\n                self.queue_depth += 1;\n            }\n            Event::Cancel(_) => {\n                self.total_cancels += 1;\n                self.queue_depth -= 1;\n            }\n            Event::Fill(_) => {\n                self.total_fills += 1;\n                self.queue_depth -= 1;\n            }\n        }\n    }\n    \n    fn cancel_rate(&self) -> f64 {\n        if self.total_orders == 0 {\n            0.0\n        } else {\n            self.total_cancels as f64 / self.total_orders as f64\n        }\n    }\n}",
+  "hints": [
+    "Use match to handle each event variant",
+    "Remember to check for division by zero in cancel_rate",
+    "queue_depth increases on NewOrder, decreases on Cancel and Fill"
+  ],
+  "difficulty": "hard",
+  "skills": ["metrics", "invariants", "testing"]
+}

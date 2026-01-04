@@ -1,0 +1,76 @@
+{
+  "id": "w1d4-quiz",
+  "title": "Metrics Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why should queue_depth never be negative?",
+      "type": "multiple-choice",
+      "options": [
+        "It would use negative memory",
+        "It indicates more orders were cancelled/filled than placed - a logic error",
+        "Negative numbers are slower to compute",
+        "The display would look wrong"
+      ],
+      "correct_answer": 1,
+      "explanation": "Queue depth represents the count of open orders. A negative value would mean more orders were cancelled or filled than were placed, which is impossible and indicates a bug in the event processing logic.",
+      "skills": ["invariants", "metrics"]
+    },
+    {
+      "id": "q2",
+      "question": "What's the relationship between fills and new_orders in a correct simulator?",
+      "type": "multiple-choice",
+      "options": [
+        "fills should equal new_orders",
+        "fills should always be greater than new_orders",
+        "fills should be less than or equal to new_orders",
+        "There is no relationship"
+      ],
+      "correct_answer": 2,
+      "explanation": "You can only fill orders that have been placed. Therefore, the total number of fills must be less than or equal to the total number of new orders. More fills than orders indicates a bug.",
+      "skills": ["invariants", "metrics"]
+    },
+    {
+      "id": "q3",
+      "question": "Why use u64 for metrics counters instead of i64?",
+      "type": "multiple-choice",
+      "options": [
+        "u64 is faster to increment",
+        "Counters should never be negative; u64 makes invalid states unrepresentable",
+        "u64 has more precision",
+        "It's required by Rust conventions"
+      ],
+      "correct_answer": 1,
+      "explanation": "Event counters (orders, fills, cancels) should never be negative. Using u64 makes it impossible to represent invalid negative counts, following the principle of making invalid states unrepresentable.",
+      "skills": ["modeling", "invariants"]
+    },
+    {
+      "id": "q4",
+      "question": "How should cancel_rate() handle the case when total_orders is 0?",
+      "type": "multiple-choice",
+      "options": [
+        "Return infinity",
+        "Panic with an error message",
+        "Return 0.0 (no orders means no cancels to rate)",
+        "Return -1.0 to indicate error"
+      ],
+      "correct_answer": 2,
+      "explanation": "When there are no orders, there's no meaningful cancel rate. Returning 0.0 is a sensible default that avoids division by zero and represents 'no activity' appropriately.",
+      "skills": ["metrics"]
+    },
+    {
+      "id": "q5",
+      "question": "What's the best way to test that invariants hold across many events?",
+      "type": "multiple-choice",
+      "options": [
+        "Manually check a few examples",
+        "Generate a sequence of events and assert invariants after each one",
+        "Only test at the end of the simulation",
+        "Trust the type system to prevent violations"
+      ],
+      "correct_answer": 1,
+      "explanation": "Generate a test sequence of events (potentially with property-based testing) and assert that invariants hold after processing each event. This catches violations at the moment they occur, making bugs easier to diagnose.",
+      "skills": ["testing", "invariants"]
+    }
+  ]
+}

@@ -65,7 +65,7 @@ export function Welcome() {
 
   const handleCreateProfile = async () => {
     try {
-      await createUser('default')
+      await createUser()
       setProfileCreated(true)
       await completeOnboarding()
       nextStep()

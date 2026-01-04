@@ -4,6 +4,10 @@ import { useUpdateStore } from '@/stores/updateStore'
 import { Button } from './common/Button'
 
 export function UpdateChecker() {
+  // TODO: Enable when updater signing keys are configured
+  // The updater plugin requires a valid pubkey to function
+  const UPDATER_ENABLED = false
+
   const {
     updateAvailable,
     updateInfo,
@@ -15,10 +19,17 @@ export function UpdateChecker() {
     clearError,
   } = useUpdateStore()
 
-  // Check for updates on mount
+  // Check for updates on mount (only if enabled)
   useEffect(() => {
-    checkForUpdate()
+    if (UPDATER_ENABLED) {
+      checkForUpdate()
+    }
   }, [])
+
+  // Don't render anything if updater is disabled
+  if (!UPDATER_ENABLED) {
+    return null
+  }
 
   if (error) {
     return (

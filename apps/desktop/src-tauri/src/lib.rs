@@ -17,7 +17,8 @@ pub fn run() {
     tauri::Builder::default()
         .plugin(tauri_plugin_shell::init())
         .plugin(tauri_plugin_dialog::init())
-        .plugin(tauri_plugin_updater::Builder::new().build())
+        // NOTE: Updater disabled until signing keys are configured
+        // .plugin(tauri_plugin_updater::Builder::new().build())
         .manage(app_state)
         .invoke_handler(tauri::generate_handler![
             // User commands
@@ -77,9 +78,9 @@ pub fn run() {
             commands::system::is_first_launch,
             commands::system::complete_onboarding,
             commands::system::is_onboarding_complete,
-            // Update commands
-            commands::update::check_for_update,
-            commands::update::download_and_install_update,
+            // Update commands (disabled until signing keys configured)
+            // commands::update::check_for_update,
+            // commands::update::download_and_install_update,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

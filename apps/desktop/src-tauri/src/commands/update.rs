@@ -9,6 +9,9 @@ pub struct UpdateInfo {
     pub body: Option<String>,
 }
 
+// These commands are disabled until signing keys are configured.
+// See lib.rs for the commented-out handler registration.
+#[allow(dead_code)]
 #[tauri::command]
 pub async fn check_for_update(app: AppHandle) -> Result<Option<UpdateInfo>, String> {
     let updater = app.updater().map_err(|e| e.to_string())?;
@@ -26,6 +29,7 @@ pub async fn check_for_update(app: AppHandle) -> Result<Option<UpdateInfo>, Stri
     }
 }
 
+#[allow(dead_code)]
 #[tauri::command]
 pub async fn download_and_install_update(app: AppHandle) -> Result<(), String> {
     let updater = app.updater().map_err(|e| e.to_string())?;

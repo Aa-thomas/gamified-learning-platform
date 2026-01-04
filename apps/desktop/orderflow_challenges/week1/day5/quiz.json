@@ -1,0 +1,76 @@
+{
+  "id": "w1d5-quiz",
+  "title": "Integration Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "Why should the core simulation function NOT print output directly?",
+      "type": "multiple-choice",
+      "options": [
+        "Printing is slow",
+        "It makes the function testable and allows different output formats (text, JSON, etc.)",
+        "Rust doesn't support printing from library code",
+        "It would use too much memory"
+      ],
+      "correct_answer": 1,
+      "explanation": "Keeping the core pure (no I/O) makes it testable without capturing stdout. It also allows the shell to choose output format (text, JSON, file) without changing the core logic.",
+      "skills": ["cli", "integration"]
+    },
+    {
+      "id": "q2",
+      "question": "How do you prove your simulator is deterministic?",
+      "type": "multiple-choice",
+      "options": [
+        "Run it once and check the output looks reasonable",
+        "Run twice with the same seed and diff the output - should be identical",
+        "Use a debugger to step through the code",
+        "Check that it compiles without warnings"
+      ],
+      "correct_answer": 1,
+      "explanation": "The simplest proof is: same seed, same ticks, same output. Run twice and diff - if there's any difference, determinism is broken. This should be documented in your README.",
+      "skills": ["determinism", "testing"]
+    },
+    {
+      "id": "q3",
+      "question": "What's the benefit of using clap's derive macro for CLI parsing?",
+      "type": "multiple-choice",
+      "options": [
+        "It's faster at runtime",
+        "Type-safe argument parsing with automatic help generation and validation",
+        "It uses less memory",
+        "It works without dependencies"
+      ],
+      "correct_answer": 1,
+      "explanation": "Clap's derive macro provides type-safe parsing (wrong types fail early), automatic --help generation, default values, and validation - all from a simple struct definition.",
+      "skills": ["cli"]
+    },
+    {
+      "id": "q4",
+      "question": "When integrating agents with the engine, what order should agents be processed in?",
+      "type": "multiple-choice",
+      "options": [
+        "Random order for realism",
+        "Reverse alphabetical by name",
+        "A stable, deterministic order (e.g., sorted by agent ID)",
+        "Order doesn't matter"
+      ],
+      "correct_answer": 2,
+      "explanation": "Agents must be processed in a stable, deterministic order (like sorted by ID) to ensure the same seed produces the same results. Random or unstable ordering breaks reproducibility.",
+      "skills": ["integration", "determinism"]
+    },
+    {
+      "id": "q5",
+      "question": "What should happen when a user provides an invalid --seed value (e.g., negative)?",
+      "type": "multiple-choice",
+      "options": [
+        "Silently use a default value",
+        "Panic immediately",
+        "Show a clear error message explaining the valid range",
+        "Ignore the flag entirely"
+      ],
+      "correct_answer": 2,
+      "explanation": "Good CLI UX means clear, actionable error messages. Users should know what went wrong and how to fix it. Clap can handle this automatically with proper type annotations.",
+      "skills": ["cli"]
+    }
+  ]
+}

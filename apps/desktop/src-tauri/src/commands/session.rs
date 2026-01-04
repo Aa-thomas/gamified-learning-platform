@@ -2,7 +2,7 @@ use crate::state::AppState;
 use glp_core::db::repos::{ProgressRepository, SessionRepository, UserRepository};
 use glp_core::gamification::{calculate_level, get_streak_multiplier};
 use glp_core::models::SessionHistory;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use tauri::State;
 
 #[derive(Serialize)]
@@ -45,7 +45,7 @@ pub struct CompletedActivitySummary {
 #[tauri::command]
 pub fn create_daily_session(
     state: State<AppState>,
-    target_minutes: u32,
+    _target_minutes: u32,
 ) -> Result<SessionPlan, String> {
     let user_id = state
         .current_user_id
@@ -59,7 +59,7 @@ pub fn create_daily_session(
         .with_connection(|conn| {
             // Get user's progress to find available content
             let all_progress = ProgressRepository::get_all_for_user(conn, &user_id)?;
-            let completed_ids: Vec<String> = all_progress
+            let _completed_ids: Vec<String> = all_progress
                 .iter()
                 .filter(|p| p.status == glp_core::models::NodeStatus::Completed)
                 .map(|p| p.node_id.clone())
@@ -108,7 +108,7 @@ pub fn start_session(
     state: State<AppState>,
     session_id: String,
 ) -> Result<(), String> {
-    let user_id = state
+    let _user_id = state
         .current_user_id
         .lock()
         .map_err(|e| e.to_string())?
@@ -118,7 +118,7 @@ pub fn start_session(
     state
         .db
         .with_connection(|conn| {
-            let mut session = SessionRepository::get_by_id(conn, &session_id)?
+            let session = SessionRepository::get_by_id(conn, &session_id)?
                 .ok_or_else(|| glp_core::db::error::DbError::NotFound("Session not found".to_string()))?;
 
             // Session is already started when created

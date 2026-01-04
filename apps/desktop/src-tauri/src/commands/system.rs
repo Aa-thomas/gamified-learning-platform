@@ -370,7 +370,7 @@ pub fn is_first_launch(state: State<AppState>) -> Result<bool, String> {
 
 /// Mark onboarding as complete
 #[tauri::command]
-pub fn complete_onboarding(state: State<AppState>) -> Result<(), String> {
+pub fn complete_onboarding(_state: State<AppState>) -> Result<(), String> {
     let config_dir = get_config_dir()?;
     fs::create_dir_all(&config_dir).map_err(|e| e.to_string())?;
 

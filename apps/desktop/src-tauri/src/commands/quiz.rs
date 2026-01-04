@@ -96,7 +96,7 @@ pub fn submit_quiz(
             let attempt_number = progress.as_ref().map(|p| p.attempts + 1).unwrap_or(1);
 
             // Grade quiz
-            let (score, correct_count, total) = grade_quiz(&quiz, &request.answers);
+            let (score, _correct_count, _total) = grade_quiz(&quiz, &request.answers);
             let total_points: i32 = quiz.questions.iter().map(|q| q.points).sum();
             let score_percentage = (score as f64 / total_points as f64) * 100.0;
 

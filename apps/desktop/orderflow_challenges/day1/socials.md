@@ -1,0 +1,3 @@
+Fuzzy types create impossible to maintain systems.
+
+Using a typesystem allows us to eliminate an entire class of bugs. But if you fail to model it correctly you run into all sorts of problems. you lose compile time guarantees, and your error handling will happen at runtime.Your goal should be to make invalid states unrepresentable and errors recoverable. luckily i program in rust and this makes it easy. in rust we can create an enum and use pattern matching. This way the compiler will tell us if we fail to handle a case inside the enum. We can model our errors up front here too. I have a small project im building where i have an event driven system one of the first lessons ive learned is to make your events a closed exhaustive set that the compiler can reason about. 

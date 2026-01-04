@@ -13,6 +13,7 @@ pub struct AppState {
 }
 
 impl AppState {
+    #[allow(dead_code)]
     pub fn database(&self) -> &AppDatabase {
         &self.db
     }

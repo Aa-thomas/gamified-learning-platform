@@ -1,0 +1,76 @@
+{
+  "id": "w1d2-quiz",
+  "title": "Determinism Quiz",
+  "questions": [
+    {
+      "id": "q1",
+      "question": "You have apply(state, event) and agent_step(state, rng). Where is randomness allowed, and why is it forbidden in the other function?",
+      "type": "multiple-choice",
+      "options": [
+        "Randomness allowed in both - they need to be flexible",
+        "Randomness allowed in agent_step to generate intent/events; forbidden in apply because it must be deterministic given inputs",
+        "Randomness allowed only in apply - agents should be predictable",
+        "Neither should use randomness - use fixed sequences instead"
+      ],
+      "correct_answer": 1,
+      "explanation": "Randomness is allowed in agent_step to generate intent/events under a seed. It's forbidden in apply because it must be a deterministic state machine given inputs. Mixing randomness into apply breaks replay and makes tests flaky/unreproducible.",
+      "skills": ["determinism", "rng"]
+    },
+    {
+      "id": "q2",
+      "question": "What is a 'golden' test in practice, and why is it useful for deterministic simulators?",
+      "type": "multiple-choice",
+      "options": [
+        "A test that runs faster than other tests",
+        "A test that asserts an exact expected output for fixed inputs - useful because it catches behavior drift from refactors",
+        "A test that validates performance benchmarks",
+        "A test that checks memory usage patterns"
+      ],
+      "correct_answer": 1,
+      "explanation": "A golden test asserts an exact expected output (string/trace/fingerprint) for fixed inputs. It's useful because refactors can subtly change behavior even when types still compile. For determinism, it catches 'behavior drift' immediately and makes it easy to bisect.",
+      "skills": ["testing", "determinism"]
+    },
+    {
+      "id": "q3",
+      "question": "You collect per-symbol metrics in a HashMap and serialize them. Trace diffs appear across runs with the same seed. What are two deterministic fixes?",
+      "type": "multiple-choice",
+      "options": [
+        "Use a faster hashing algorithm, or increase HashMap capacity",
+        "Convert to Vec<(K,V)> and sort by key before serializing, or use BTreeMap for ordered iteration",
+        "Add timestamps to each metric entry, or use UUIDs as keys",
+        "Cache the serialization result, or use a different format"
+      ],
+      "correct_answer": 1,
+      "explanation": "Convert to Vec<(K,V)> and sort by key before printing/serializing, or use BTreeMap for ordered iteration. Ensure any derived ordering is explicitly defined (not 'whatever the map gives').",
+      "skills": ["determinism"]
+    },
+    {
+      "id": "q4",
+      "question": "Your replay file must be byte-for-byte identical for the same seed, but you also want to print 'events/sec.' How do you design this?",
+      "type": "multiple-choice",
+      "options": [
+        "Include events/sec in the replay file with timestamps",
+        "Keep replay/trace purely deterministic (tick + events); compute events/sec outside trace as display-only",
+        "Round events/sec to whole numbers to reduce variance",
+        "Use a separate process to measure and record performance"
+      ],
+      "correct_answer": 1,
+      "explanation": "Keep replay/trace purely deterministic (tick index + events); exclude wall-clock from trace. If you report events/sec, compute it outside trace (display-only) or report deterministic 'events/tick.' Wall-clock numbers become non-replayable.",
+      "skills": ["determinism", "metrics"]
+    },
+    {
+      "id": "q5",
+      "question": "What type/signature choice best enforces 'no hidden nondeterminism'?",
+      "type": "multiple-choice",
+      "options": [
+        "Use global variables to track state across functions",
+        "Make nondeterministic dependencies explicit parameters (e.g., fn step(..., rng: &mut Rng) -> Result<...>)",
+        "Use interior mutability with RefCell for all state",
+        "Avoid using any random values in the system"
+      ],
+      "correct_answer": 1,
+      "explanation": "Make nondeterministic dependencies explicit parameters (e.g., fn step(..., rng: &mut Rng) -> Result<...>). Return Result for invariant violations instead of panicking. Explicit inputs/outputs make behavior testable and replayable.",
+      "skills": ["determinism", "modeling"]
+    }
+  ]
+}

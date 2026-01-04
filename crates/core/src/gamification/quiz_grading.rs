@@ -1,4 +1,4 @@
-use crate::models::quiz::{Question, QuestionOption, Quiz};
+use crate::models::quiz::Quiz;
 use std::collections::HashMap;
 
 /// Grade a quiz and return (score, correct_count, total_questions)
@@ -25,6 +25,7 @@ pub fn grade_quiz(quiz: &Quiz, answers: &HashMap<String, String>) -> (i32, usize
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::models::quiz::{Question, QuestionOption};
 
     fn create_test_quiz() -> Quiz {
         Quiz {

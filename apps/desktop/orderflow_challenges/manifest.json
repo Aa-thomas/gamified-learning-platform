@@ -1,0 +1,247 @@
+{
+  "version": "1.0",
+  "title": "Order Flow Simulator - Week 1",
+  "description": "Build a deterministic order flow simulator in Rust. Learn event modeling, seeded RNG, agent traits, and testing patterns.",
+  "author": "Aaron",
+  "created_at": "2026-01-04",
+  "weeks": [
+    {
+      "id": "week1",
+      "title": "Week 1: Deterministic Order Flow Simulator",
+      "description": "Design an event-driven system with deterministic simulation, clean domain modeling, and comprehensive testing",
+      "days": [
+        {
+          "id": "week1-day1",
+          "title": "Day 1: Events, State & Match",
+          "description": "Model an event-driven core with enums + match",
+          "nodes": [
+            {
+              "id": "w1d1-lecture",
+              "type": "lecture",
+              "title": "Deterministic Event Modeling",
+              "description": "Learn to model events and state with enums and match expressions",
+              "difficulty": "medium",
+              "estimated_minutes": 30,
+              "xp_reward": 25,
+              "content_path": "week1/day1/lecture.md",
+              "skills": ["enums", "match", "modeling"],
+              "prerequisites": []
+            },
+            {
+              "id": "w1d1-quiz",
+              "type": "quiz",
+              "title": "Event Modeling Quiz",
+              "description": "Test your understanding of event-driven design",
+              "difficulty": "medium",
+              "estimated_minutes": 15,
+              "xp_reward": 50,
+              "content_path": "week1/day1/quiz.json",
+              "skills": ["enums", "match", "modeling"],
+              "prerequisites": ["w1d1-lecture"]
+            },
+            {
+              "id": "w1d1-challenge",
+              "type": "mini-challenge",
+              "title": "Apply Event State Machine",
+              "description": "Build a minimal event → state transition core",
+              "difficulty": "medium",
+              "estimated_minutes": 45,
+              "xp_reward": 100,
+              "content_path": "week1/day1/challenge.json",
+              "skills": ["enums", "match", "testing"],
+              "prerequisites": ["w1d1-quiz"]
+            }
+          ]
+        },
+        {
+          "id": "week1-day2",
+          "title": "Day 2: Seeded RNG & Determinism",
+          "description": "Thread seeded RNG through your system",
+          "nodes": [
+            {
+              "id": "w1d2-lecture",
+              "type": "lecture",
+              "title": "Determinism Plumbing",
+              "description": "Learn to implement seeded RNG and golden replay tests",
+              "difficulty": "medium",
+              "estimated_minutes": 30,
+              "xp_reward": 25,
+              "content_path": "week1/day2/lecture.md",
+              "skills": ["determinism", "rng", "testing"],
+              "prerequisites": ["w1d1-challenge"]
+            },
+            {
+              "id": "w1d2-quiz",
+              "type": "quiz",
+              "title": "Determinism Quiz",
+              "description": "Test your understanding of deterministic systems",
+              "difficulty": "medium",
+              "estimated_minutes": 15,
+              "xp_reward": 50,
+              "content_path": "week1/day2/quiz.json",
+              "skills": ["determinism", "rng"],
+              "prerequisites": ["w1d2-lecture"]
+            },
+            {
+              "id": "w1d2-challenge",
+              "type": "mini-challenge",
+              "title": "Seeded RNG Implementation",
+              "description": "Implement a seeded RNG and prove repeatability",
+              "difficulty": "medium",
+              "estimated_minutes": 45,
+              "xp_reward": 100,
+              "content_path": "week1/day2/challenge.json",
+              "skills": ["determinism", "rng", "testing"],
+              "prerequisites": ["w1d2-quiz"]
+            }
+          ]
+        },
+        {
+          "id": "week1-day3",
+          "title": "Day 3: Agents & Regimes",
+          "description": "Design Agent traits with regime-driven behavior",
+          "nodes": [
+            {
+              "id": "w1d3-lecture",
+              "type": "lecture",
+              "title": "Agent Trait Design",
+              "description": "Design deterministic agent policies under different regimes",
+              "difficulty": "hard",
+              "estimated_minutes": 35,
+              "xp_reward": 25,
+              "content_path": "week1/day3/lecture.md",
+              "skills": ["traits", "agents", "regimes"],
+              "prerequisites": ["w1d2-challenge"]
+            },
+            {
+              "id": "w1d3-quiz",
+              "type": "quiz",
+              "title": "Agents & Regimes Quiz",
+              "description": "Test your understanding of agent-based design",
+              "difficulty": "hard",
+              "estimated_minutes": 15,
+              "xp_reward": 50,
+              "content_path": "week1/day3/quiz.json",
+              "skills": ["traits", "agents"],
+              "prerequisites": ["w1d3-lecture"]
+            },
+            {
+              "id": "w1d3-challenge",
+              "type": "mini-challenge",
+              "title": "Two Agents Implementation",
+              "description": "Implement NoiseTrader and CancelBot agents",
+              "difficulty": "hard",
+              "estimated_minutes": 60,
+              "xp_reward": 100,
+              "content_path": "week1/day3/challenge.json",
+              "skills": ["traits", "agents", "testing"],
+              "prerequisites": ["w1d3-quiz"]
+            }
+          ]
+        },
+        {
+          "id": "week1-day4",
+          "title": "Day 4: Metrics & Invariants",
+          "description": "Implement metrics tracking and enforce invariants",
+          "nodes": [
+            {
+              "id": "w1d4-lecture",
+              "type": "lecture",
+              "title": "Metrics & Invariants",
+              "description": "Track metrics and enforce system invariants",
+              "difficulty": "hard",
+              "estimated_minutes": 30,
+              "xp_reward": 25,
+              "content_path": "week1/day4/lecture.md",
+              "skills": ["metrics", "invariants", "testing"],
+              "prerequisites": ["w1d3-challenge"]
+            },
+            {
+              "id": "w1d4-quiz",
+              "type": "quiz",
+              "title": "Metrics Quiz",
+              "description": "Test your understanding of metrics and invariants",
+              "difficulty": "hard",
+              "estimated_minutes": 15,
+              "xp_reward": 50,
+              "content_path": "week1/day4/quiz.json",
+              "skills": ["metrics", "invariants"],
+              "prerequisites": ["w1d4-lecture"]
+            },
+            {
+              "id": "w1d4-challenge",
+              "type": "mini-challenge",
+              "title": "Metrics Implementation",
+              "description": "Implement metrics tracking with invariant tests",
+              "difficulty": "hard",
+              "estimated_minutes": 60,
+              "xp_reward": 100,
+              "content_path": "week1/day4/challenge.json",
+              "skills": ["metrics", "invariants", "testing"],
+              "prerequisites": ["w1d4-quiz"]
+            }
+          ]
+        },
+        {
+          "id": "week1-day5",
+          "title": "Day 5: Integration & Polish",
+          "description": "Integrate all components and polish the CLI",
+          "nodes": [
+            {
+              "id": "w1d5-lecture",
+              "type": "lecture",
+              "title": "Integration & CLI Design",
+              "description": "Integrate components and design a clean CLI",
+              "difficulty": "hard",
+              "estimated_minutes": 30,
+              "xp_reward": 25,
+              "content_path": "week1/day5/lecture.md",
+              "skills": ["cli", "integration", "testing"],
+              "prerequisites": ["w1d4-challenge"]
+            },
+            {
+              "id": "w1d5-quiz",
+              "type": "quiz",
+              "title": "Integration Quiz",
+              "description": "Test your understanding of system integration",
+              "difficulty": "hard",
+              "estimated_minutes": 15,
+              "xp_reward": 50,
+              "content_path": "week1/day5/quiz.json",
+              "skills": ["cli", "integration"],
+              "prerequisites": ["w1d5-lecture"]
+            },
+            {
+              "id": "w1d5-challenge",
+              "type": "mini-challenge",
+              "title": "Full Simulator",
+              "description": "Build the complete order flow simulator",
+              "difficulty": "very-hard",
+              "estimated_minutes": 90,
+              "xp_reward": 150,
+              "content_path": "week1/day5/challenge.json",
+              "skills": ["cli", "integration", "testing"],
+              "prerequisites": ["w1d5-quiz"]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkpoints": [],
+  "skills": [
+    {"id": "enums", "name": "Enums & Pattern Matching", "description": "Using Rust enums and match expressions"},
+    {"id": "match", "name": "Match Expressions", "description": "Pattern matching and exhaustive handling"},
+    {"id": "modeling", "name": "Domain Modeling", "description": "Modeling domain concepts with types"},
+    {"id": "determinism", "name": "Determinism", "description": "Building reproducible systems"},
+    {"id": "rng", "name": "Seeded RNG", "description": "Implementing and using seeded random number generators"},
+    {"id": "testing", "name": "Testing", "description": "Writing effective tests including golden tests"},
+    {"id": "traits", "name": "Traits", "description": "Defining and implementing traits"},
+    {"id": "agents", "name": "Agent Design", "description": "Designing agent-based systems"},
+    {"id": "regimes", "name": "Regime Modeling", "description": "Modeling system regimes and transitions"},
+    {"id": "metrics", "name": "Metrics", "description": "Tracking and computing system metrics"},
+    {"id": "invariants", "name": "Invariants", "description": "Defining and enforcing system invariants"},
+    {"id": "cli", "name": "CLI Design", "description": "Building command-line interfaces"},
+    {"id": "integration", "name": "Integration", "description": "Integrating system components"}
+  ]
+}

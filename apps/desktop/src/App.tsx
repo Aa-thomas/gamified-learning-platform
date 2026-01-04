@@ -4,6 +4,7 @@ import { Navigation } from './components/layout/Navigation'
 import { StatusBar } from './components/layout/StatusBar'
 import { BadgeUnlockNotification } from './components/badges/BadgeUnlockNotification'
 import { KeyboardShortcutsModal } from './components/common/KeyboardShortcutsModal'
+import { UpdateChecker } from './components/UpdateChecker'
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts'
 import { useThemeStore } from './stores/themeStore'
 import { Home } from './pages/Home'
@@ -59,6 +60,7 @@ function AppContent() {
 
       {!isWelcomePage && <StatusBar />}
       {!isWelcomePage && <BadgeUnlockNotification />}
+      {!isWelcomePage && <UpdateChecker />}
 
       <KeyboardShortcutsModal
         isOpen={isHelpModalOpen}

@@ -2,13 +2,12 @@ import { create } from 'zustand'
 import { invoke } from '@tauri-apps/api/core'
 
 export interface User {
-  id: number
-  username: string
-  xp: number
-  level: number
-  streak_days: number
-  last_active_date: string
-  created_at: string
+  id: string
+  total_xp: number
+  current_level: number
+  current_streak: number
+  xp_for_next_level: number
+  xp_progress_percentage: number
 }
 
 interface UserState {
@@ -16,7 +15,7 @@ interface UserState {
   loading: boolean
   error: string | null
   fetchUser: () => Promise<void>
-  createUser: (username: string) => Promise<void>
+  createUser: () => Promise<void>
   updateXp: (xpDelta: number) => Promise<void>
 }
 
@@ -35,10 +34,10 @@ export const useUserStore = create<UserState>((set, get) => ({
     }
   },
 
-  createUser: async (username: string) => {
+  createUser: async () => {
     set({ loading: true, error: null })
     try {
-      const user = await invoke<User>('create_user', { username })
+      const user = await invoke<User>('create_user')
       set({ user, loading: false })
     } catch (error) {
       set({ error: String(error), loading: false })
