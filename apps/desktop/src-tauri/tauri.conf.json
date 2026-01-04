@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Gamified Learning Platform",
+  "productName": "RustCamp",
   "version": "0.1.0",
-  "identifier": "com.gamified-learning.app",
+  "identifier": "dev.rustcamp.app",
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "Gamified Learning Platform",
+        "title": "RustCamp",
         "width": 1200,
         "height": 800,
         "resizable": true
@@ -30,6 +30,22 @@
       "icons/128x128@2x.png",
       "icons/icon.png"
     ],
-    "targets": "all"
+    "targets": ["deb", "appimage"],
+    "category": "Education",
+    "shortDescription": "Gamified Rust Learning Platform",
+    "longDescription": "A desktop application for learning Rust through gamified challenges, quizzes, and interactive content. Earn XP, maintain streaks, unlock badges, and track your mastery.",
+    "linux": {
+      "deb": {
+        "depends": ["libwebkit2gtk-4.1-0", "libgtk-3-0"]
+      }
+    }
+  },
+  "plugins": {
+    "updater": {
+      "endpoints": [
+        "https://github.com/Aa-thomas/gamified-learning-platform/releases/latest/download/latest.json"
+      ],
+      "pubkey": ""
+    }
   }
 }

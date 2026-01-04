@@ -7,4 +7,5 @@ pub mod quiz;
 pub mod review;
 pub mod session;
 pub mod system;
+pub mod update;
 pub mod user;
